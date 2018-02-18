@@ -1,0 +1,8 @@
+language: csharp
+solution: Raymond.Costco.Web.sln
+install:
+  - nuget restore Raymond.Costco.Web.sln
+  - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=debug Raymond.Costco.Web.sln
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./Raymond.Costco.Web.AutoTest/bin/Debug/Raymond.Costco.Web.AutoTest.dll
