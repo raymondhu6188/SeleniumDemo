@@ -1,8 +1,4 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
 using Raymond.Costco.Web.AutoTest.Library.Pages;
 using Raymond.Costco.Web.AutoTest.Library.Components;
 using Raymond.Costco.Web.AutoTest.Library;
