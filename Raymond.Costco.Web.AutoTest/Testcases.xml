@@ -1,0 +1,10 @@
+﻿<Testcases>
+  <SearchScenarios>
+    <SearchScenarios_Basic>
+      <CommonKeyword>sofa</CommonKeyword>
+    </SearchScenarios_Basic>
+    <SearchScenarios_NoResult>
+      <NoResultKeyword>asdasd</NoResultKeyword>
+    </SearchScenarios_NoResult>
+  </SearchScenarios>
+</Testcases>

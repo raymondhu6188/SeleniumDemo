@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/packages
+/Raymond.Costco.Web.AutoTest/bin/Debug
+/Raymond.Costco.Web.AutoTest/obj
+/Raymond.Costco.Web.AutoTest.Library/bin/Debug
+/Raymond.Costco.Web.AutoTest.Library/obj
+*.sqlite
+/.vs/Raymond.Costco.Web/v15
+/.vs/SeleniumDemo/v15
+/.vs
