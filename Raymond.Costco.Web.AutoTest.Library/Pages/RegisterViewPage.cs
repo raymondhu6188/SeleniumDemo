@@ -14,7 +14,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("register_email1"));
+                return wait.Until(d => d.FindElement(By.Id("register_email1")));
             }
         }
 
@@ -22,7 +22,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("logonPassword"));
+                return wait.Until(d => d.FindElement(By.Id("logonPassword")));
             }
         }
 
@@ -30,7 +30,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("logonPasswordVerify"));
+                return wait.Until(d => d.FindElement(By.Id("logonPasswordVerify")));
             }
         }
 
@@ -38,7 +38,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("register_userField2"));
+                return wait.Until(d => d.FindElement(By.Id("register_userField2")));
             }
         }
 
@@ -46,7 +46,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.XPath("//input[@type='submit' and @value='Register']"));
+                return wait.Until(d => d.FindElement(By.XPath("//input[@type='submit' and @value='Register']")));
             }
         }
         
@@ -54,7 +54,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("register_sendMeEmail"));
+                return wait.Until(d => d.FindElement(By.Id("register_sendMeEmail")));
             }
         }
 
@@ -62,14 +62,12 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("register"));
+                return wait.Until(d => d.FindElement(By.Id("register")));
             }
         }
 
         public void Register(string email, string password, string membership = "")
         {
-            this.WaitAndVerifyLoadingCompletion(this.DivRegister);
-
             this.InputEmail.Click();
             this.InputEmail.SendKeys(email);
             this.InputPassword.Click();

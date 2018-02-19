@@ -14,14 +14,14 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("product-page"));
+                return wait.Until(d => d.FindElement(By.Id("product-page")));
             }
         }
         public IWebElement LabelCrumbs
         {
             get
             {
-                return driver.FindElement(By.Id("crumbs_ul"));
+                return wait.Until(d => d.FindElement(By.Id("crumbs_ul")));
             }
         }
 
@@ -29,7 +29,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return DivProduct.FindElement(By.ClassName("product-h1-container"));
+                return wait.Until(d => d.FindElement(By.XPath("//h1[@itemprop='name']")));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return DivProduct.FindElement(By.Id("productImageContainer"));
+                return wait.Until(d => d.FindElement(By.Id("productImageContainer")));
             }
         }
 
@@ -45,34 +45,33 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return DivProduct.FindElement(By.Id("product-details"));
+                return wait.Until(d => d.FindElement(By.Id("product-details")));
             }
         }
-        public IWebElement LablePrice
+        public IWebElement LabelPrice
         {
             get
             {
-                return DivProductDetail.FindElement(By.XPath("div[@id='math-table']/span[@class='value']"));
+                return wait.Until(d => DivProductDetail.FindElement(By.XPath("//div[@id='math-table']")).FindElement(By.XPath("//span[@class='value']")));
             }
         }
         public IWebElement InputCount
         {
             get
             {
-                return DivProductDetail.FindElement(By.Id("minQtyText"));
+                return wait.Until(d => DivProductDetail.FindElement(By.Id("minQtyText")));
             }
         }
         public IWebElement ButtonAddCart
         {
             get
             {
-                return DivProductDetail.FindElement(By.Name("add-to-cart"));
+                return wait.Until(d => DivProductDetail.FindElement(By.Name("add-to-cart")));
             }
         }
 
         public void AddToCart(int count = 1)
         {
-            this.WaitAndVerifyLoadingCompletion(this.DivProductDetail);
             if (count >= 1)
             {
                 this.InputCount.Click();

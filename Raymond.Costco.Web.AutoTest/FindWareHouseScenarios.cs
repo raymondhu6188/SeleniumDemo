@@ -12,18 +12,12 @@ namespace Raymond.Costco.Web.AutoTest
         public void FindWareHouseScenarios_Basic()
         {
             Header header = new Header(driver, wait);
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
-            {
-                Assert.Fail("The HomePage is not loaded during expected time. Quit.");
-            }
 
             header.FindWarehouse("98052");
 
             WarehouseLocationsPage warehouseLocationsPage = new WarehouseLocationsPage(driver, wait);
-            if (!warehouseLocationsPage.WaitAndVerifyLoadingCompletion(warehouseLocationsPage.DivListTable))
-            {
-                Assert.Fail("The WarehouseLocationsPage is not loaded during expected time. Quit.");
-            }
+
+            Assert.IsTrue(warehouseLocationsPage.DivListTable.Displayed);
 
             var list = warehouseLocationsPage.Warehouses;
             Assert.Greater(list.Count, 0);
@@ -35,19 +29,12 @@ namespace Raymond.Costco.Web.AutoTest
         public void FindWareHouseScenarios_NoResult()
         {
             Header header = new Header(driver, wait);
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
-            {
-                Assert.Fail("The HomePage is not loaded during expected time. Quit.");
-            }
 
             header.FindWarehouse("asdasd");
 
             WarehouseLocationsPage warehouseLocationsPage = new WarehouseLocationsPage(driver, wait);
-            if (!warehouseLocationsPage.WaitAndVerifyLoadingCompletion(warehouseLocationsPage.DivErrorContainer))
-            {
-                Assert.Fail("The WarehouseLocationsPage is not loaded during expected time. Quit.");
-            }
 
+            Assert.IsTrue(warehouseLocationsPage.DivErrorContainer.Displayed);
             Assert.IsTrue(warehouseLocationsPage.DivMap.Displayed);
         }
     }

@@ -11,14 +11,13 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
     {
         public CatalogSearchPage(IWebDriver d, WebDriverWait w) : base(d, w)
         {
-
         }
 
         public IWebElement LabelCrumbs
         {
             get
             {
-                return driver.FindElement(By.Id("crumbs_ul"));
+                return wait.Until(d => d.FindElement(By.Id("crumbs_ul")));
             }
         }
 
@@ -26,14 +25,15 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("search-filter"));
+                return wait.Until(d => d.FindElement(By.Id("search-filter")));
             }
         }
+
         public IWebElement DivSearchResult
         {
             get
             {
-                return driver.FindElement(By.Id("search-results"));
+                return wait.Until(d => d.FindElement(By.Id("search-results")));
             }
         }
 
@@ -41,7 +41,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return DivSearchResult.FindElement(By.ClassName("toolbar"));
+                return wait.Until(d => DivSearchResult.FindElement(By.ClassName("toolbar")));
             }
         }
 
@@ -58,8 +58,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
                 }
 
                 List<ProductTile> items = new List<ProductTile>();
-
-                var list = DivSearchResult.FindElements(By.XPath("//div[@class='product-tile-set']")).ToList();
+                var list = wait.Until(d => DivSearchResult.FindElements(By.XPath("//div[@class='product-tile-set']"))).ToList();
                 if (list.Count > 0)
                 {
                     foreach(var element in list)
@@ -71,11 +70,12 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
                 return items;
             }
         }
+
         public IWebElement DivNoResult
         {
             get
             {
-                return driver.FindElement(By.Id("no-results"));
+                return wait.Until(d => d.FindElement(By.Id("no-results")));
             }
         }
     }

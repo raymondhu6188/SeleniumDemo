@@ -18,28 +18,28 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("warehouse-locations"));
+                return wait.Until(d => d.FindElement(By.Id("warehouse-locations")));
             }
         }
         public IWebElement DivFindWarehouse
         {
             get
             {
-                return driver.FindElement(By.Id("warehouse-locations-id"));
+                return wait.Until(d => d.FindElement(By.Id("warehouse-locations-id")));
             }
         }
         public IWebElement InputWarehouseSearch
         {
             get
             {
-                return driver.FindElement(By.Id("warehouse-search-field"));
+                return wait.Until(d => d.FindElement(By.Id("warehouse-search-field")));
             }
         }
         public IWebElement InputWarehouseSearchButton
         {
             get
             {
-                return driver.FindElement(By.XPath("//input[@type='submit' and @value='Find a Warehouse']"));
+                return wait.Until(d => d.FindElement(By.XPath("//input[@type='submit' and @value='Find a Warehouse']")));
             }
         }
         #endregion
@@ -48,7 +48,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("header_sign_in"));
+                return wait.Until(d => d.FindElement(By.Id("header_sign_in")));
             }
         }
 
@@ -56,7 +56,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("myaccount-d"));
+                return wait.Until(d => d.FindElement(By.Id("myaccount-d")));
             }
         }
 
@@ -64,7 +64,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("cart-d"));
+                return wait.Until(d => d.FindElement(By.Id("cart-d")));
             }
         }
 
@@ -73,7 +73,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.ClassName("cart-number"));
+                return wait.Until(d => d.FindElement(By.ClassName("cart-number")));
             }
         }
         #region User Menu
@@ -81,7 +81,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("my-account-popover-container"));
+                return wait.Until(d => d.FindElement(By.Id("my-account-popover-container")));
             }
         }
 
@@ -91,7 +91,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
             {
                 if(this.DivPopOverContent.Displayed)
                 {
-                    return this.DivPopOverContent.FindElements(By.XPath("ol/li")).Where(e => e.Displayed).ToList();
+                    return wait.Until(d => this.DivPopOverContent.FindElements(By.XPath("ol/li"))).ToList();
                 }
 
                 return null;
@@ -102,7 +102,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.XPath("//input[@type='submit' and @value='Sign Out']"));
+                return wait.Until(d => d.FindElement(By.XPath("//input[@type='submit' and @value='Sign Out']")));
             }
         }
         #endregion
@@ -112,7 +112,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("search-widget"));
+                return wait.Until(d => d.FindElement(By.Id("search-widget")));
             }
         }
         
@@ -120,7 +120,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("grocery-dropdown"));
+                return wait.Until(d => d.FindElement(By.Id("grocery-dropdown")));
             }
         }
 
@@ -128,14 +128,14 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return driver.FindElement(By.Id("search-field"));
+                return wait.Until(d => d.FindElement(By.Id("search-field")));
             }
         }
         public IWebElement InputSearchButton
         {
             get
             {
-                return driver.FindElement(By.ClassName("co-search-thin"));
+                return wait.Until(d => d.FindElement(By.ClassName("co-search-thin")));
             }
         }
 
@@ -143,11 +143,11 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                var ul = this.DivSearch.FindElement(By.ClassName("dropdown-menu"));
+                var ul = wait.Until(d => this.DivSearch.FindElement(By.ClassName("dropdown-menu")));
 
                 if (ul.Displayed)
                 {
-                    return ul.FindElements(By.XPath("li/a")).Where(e => e.Displayed).ToList();
+                    return wait.Until(d => ul.FindElements(By.XPath("li/a"))).ToList();
                 }
                 else
                 {
@@ -164,7 +164,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         /// </summary>
         public void ShowUserMenu()
         {
-            this.WaitAndVerifyLoadingCompletion(this.LinkMyAccount);
+            this.ScrollIntoView(this.LinkMyAccount);
             this.MouseOver(this.LinkMyAccount);
         }
 
@@ -188,7 +188,6 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
             if (string.IsNullOrEmpty(keyword))
                 return;
 
-            this.WaitAndVerifyLoadingCompletion(this.InputSearch);
             this.ScrollIntoView(this.InputSearch);
             if (selectedGrocery > -1)
             {
@@ -213,7 +212,6 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
             if (string.IsNullOrEmpty(keyword))
                 return;
 
-            this.WaitAndVerifyLoadingCompletion(this.LinkFindWarehouse);
             this.ScrollIntoView(this.LinkFindWarehouse);
 
             this.MouseOver(this.LinkFindWarehouse);

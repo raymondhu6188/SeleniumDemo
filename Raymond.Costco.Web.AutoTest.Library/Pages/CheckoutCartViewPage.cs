@@ -18,7 +18,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("ShopCartForm"));
+                return wait.Until(d => d.FindElement(By.Id("ShopCartForm")));
             }
         }
 
@@ -27,14 +27,14 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Name("continueShopping"));
+                return wait.Until(d => d.FindElement(By.Name("continueShopping")));
             }
         }
         public IWebElement ButtonCheckout
         {
             get
             {
-                return driver.FindElement(By.Id("shopCartCheckoutSubmitButton"));
+                return wait.Until(d => d.FindElement(By.Id("shopCartCheckoutSubmitButton")));
             }
         }
 
@@ -42,7 +42,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("order-items-regular"));
+                return wait.Until(d => d.FindElement(By.Id("order-items-regular")));
             }
         }
 
@@ -57,7 +57,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
 
                 List<OrderItem> items = new List<OrderItem>();
 
-                var list = DivItemList.FindElements(By.XPath("/div[@class='order-item']/div")).ToList();
+                var list = wait.Until(d => DivItemList.FindElements(By.XPath("div[@class='order-item']/div"))).ToList();
                 if (list.Count > 0)
                 {
                     foreach (var element in list)
@@ -74,7 +74,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("order-estimated-total"));
+                return wait.Until(d => d.FindElement(By.Id("order-estimated-total")));
             }
         }
 
@@ -84,7 +84,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Name("continue-shopping"));
+                return wait.Until(d => d.FindElement(By.Name("continue-shopping")));
             }
         }
     }
