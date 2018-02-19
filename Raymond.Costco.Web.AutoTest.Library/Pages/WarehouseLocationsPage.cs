@@ -17,7 +17,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("warehouse-list"));
+                return wait.Until(d => d.FindElement(By.Id("warehouse-list")));
             }
         }
 
@@ -27,7 +27,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
             {
                 if (this.DivListTable.Displayed)
                 {
-                    return this.DivListTable.FindElements(By.XPath("tr[@class='warehouse table-row']")).Where(e => e.Displayed).ToList();
+                    return wait.Until(d => DivListTable.FindElements(By.XPath("tr[@class='warehouse table-row']"))).ToList();
                 }
 
                 return null;
@@ -38,7 +38,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("bing-map"));
+                return wait.Until(d => d.FindElement(By.Id("bing-map")));
             }
         }
 
@@ -46,7 +46,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("error-container"));
+                return wait.Until(d => d.FindElement(By.Id("error-container")));
             }
         }
         

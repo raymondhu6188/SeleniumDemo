@@ -8,14 +8,13 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
     {
         public ModelAddedCart(IWebDriver d, WebDriverWait w) : base(d, w)
         {
-
         }
 
         public IWebElement DivContent
         {
             get
             {
-                return driver.FindElement(By.ClassName("modal-content"));
+                return wait.Until(d => d.FindElement(By.ClassName("modal-content")));
             }
         }
 
@@ -23,14 +22,14 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return DivContent.FindElement(By.ClassName("btn btn-tertiary btn-block"));
+                return wait.Until(d => DivContent.FindElement(By.ClassName("btn-tertiary")));
             }
         }
         public IWebElement ButtonViewCart
         {
             get
             {
-                return DivContent.FindElement(By.ClassName("btn btn-primary btn-block"));
+                return wait.Until(d => DivContent.FindElement(By.ClassName("btn-primary")));
             }
         }
 
@@ -38,7 +37,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return DivContent.FindElement(By.ClassName("item-details"));
+                return wait.Until(d => DivContent.FindElement(By.ClassName("item-details")));
             }
         }
     }

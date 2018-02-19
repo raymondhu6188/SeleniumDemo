@@ -19,7 +19,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.ClassName("img-responsive"));
+                return wait.Until(d => this.container.FindElement(By.ClassName("img-responsive")));
             }
         }
 
@@ -27,7 +27,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.XPath("//div[@class='price']"));
+                return wait.Until(d => this.container.FindElement(By.XPath("//div[@class='price']")));
             }
         }
 
@@ -35,7 +35,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.XPath("//p[@class='description']")).Text;
+                return wait.Until(d => this.container.FindElement(By.XPath("//p[@class='description']"))).Text;
             }
         }
 
@@ -43,7 +43,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.XPath("//p[@class='description']/a")).GetAttribute("href");
+                return wait.Until(d => this.container.FindElement(By.XPath("//p[@class='description']/a"))).GetAttribute("href");
             }
         }
     }

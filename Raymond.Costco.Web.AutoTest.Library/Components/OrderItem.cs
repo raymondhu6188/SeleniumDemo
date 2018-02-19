@@ -19,7 +19,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.ClassName("img-responsive"));
+                return wait.Until(d => this.container.FindElement(By.ClassName("img-responsive")));
             }
         }
 
@@ -27,7 +27,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.XPath("//div[@class='product-title']/a")).Text;
+                return wait.Until(d => this.container.FindElement(By.XPath("//div[@class='product-title']/a"))).Text;
             }
         }
 
@@ -35,14 +35,14 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.XPath("//span[@class='price']")).Text;
+                return wait.Until(d => this.container.FindElement(By.XPath("//span[@class='price']"))).Text;
             }
         }
         public string ProductTotalPrice
         {
             get
             {
-                return this.container.FindElement(By.XPath("//div[@class='item-total']//span[@class='price']")).Text;
+                return wait.Until(d => this.container.FindElement(By.XPath("//div[@class='item-total']//span[@class='price']"))).Text;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.Id("quantity"));
+                return wait.Until(d => this.container.FindElement(By.Id("quantity")));
             }
         }
 
@@ -58,7 +58,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.Id("update_link_"));
+                return wait.Until(d => this.container.FindElement(By.Id("update_link_")));
             }
         }
 
@@ -66,10 +66,8 @@ namespace Raymond.Costco.Web.AutoTest.Library.Components
         {
             get
             {
-                return this.container.FindElement(By.LinkText("Remove"));
+                return wait.Until(d => this.container.FindElement(By.LinkText("Remove")));
             }
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 
@@ -18,13 +19,19 @@ namespace Raymond.Costco.Web.AutoTest.Library
 
             this.driver = d;
             this.wait = w;
+
+            if (!this.WaitPageAjaxLoadingCompletion)
+            {
+                Assert.Fail("The page is not loaded during expected time");
+            }
         }
 
-        public bool WaitAndVerifyLoadingCompletion(IWebElement webElement)
-        {
-            return wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete") && this.WaitForAjax() && webElement.Enabled );
-        }
-        public bool WaitForAjax()
+        public bool WaitPageAjaxLoadingCompletion => wait.Until(d => (
+                 (IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete")
+                 && this.WaitForAjax());
+
+
+        private bool WaitForAjax()
         {
             while (true)
             {
@@ -34,6 +41,7 @@ namespace Raymond.Costco.Web.AutoTest.Library
                 System.Threading.Thread.Sleep(100);
             }
         }
+
 
         public void ScrollIntoView(IWebElement webElement)
         {

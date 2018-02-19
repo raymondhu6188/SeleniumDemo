@@ -13,26 +13,20 @@ namespace Raymond.Costco.Web.AutoTest
         public void UserScenarios_Register()
         {
             Header header = new Header(driver, wait);
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
-            {
-                Assert.Fail("The HomePage is not loaded during expected time. Quit.");
-            }
  
             Assert.AreEqual(@"Sign In / Register", header.LinkSignIn.Text);
 
             header.LinkSignIn.Click();
 
             LogonFormPage logonFormPage = new LogonFormPage(driver, wait);
-            logonFormPage.WaitAndVerifyLoadingCompletion(logonFormPage.SubmitSignIn);
             logonFormPage.CreateAccount();
 
             RegisterViewPage registerViewPage = new RegisterViewPage(driver, wait);
-            registerViewPage.WaitAndVerifyLoadingCompletion(registerViewPage.SubmitRegister);
             registerViewPage.Register(Tools.RandomString(7) + "@test.com", "Biscuit-1");
 
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
+            if(!header.WaitPageAjaxLoadingCompletion)
             {
-                Assert.Fail("The redirected HomePage is not loaded after register during expected time. Quit.");
+                Assert.Fail("Redirect failed after register completion");
             }
 
             Assert.IsTrue(header.LinkMyAccount.Enabled);
@@ -42,29 +36,24 @@ namespace Raymond.Costco.Web.AutoTest
         public void UserScenarios_SignInOut()
         {
             Header header = new Header(driver, wait);
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
-            {
-                Assert.Fail("The HomePage is not loaded during expected time. Quit.");
-            }
 
             Assert.AreEqual(@"Sign In / Register", header.LinkSignIn.Text);
 
             header.LinkSignIn.Click();
 
             LogonFormPage logonFormPage = new LogonFormPage(driver, wait);
-            logonFormPage.WaitAndVerifyLoadingCompletion(logonFormPage.SubmitSignIn);
             logonFormPage.SignIn("testhjy@test.com", "Biscuit-1");
 
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
+            if (!header.WaitPageAjaxLoadingCompletion)
             {
-                Assert.Fail("The redirected HomePage is not loaded after register during expected time. Quit.");
+                Assert.Fail("Redirect failed after signed in");
             }
 
             Assert.IsTrue(header.LinkMyAccount.Enabled);
 
             header.SignOut();
 
-            if (!logonFormPage.WaitAndVerifyLoadingCompletion(logonFormPage.SubmitSignIn))
+            if (!logonFormPage.WaitPageAjaxLoadingCompletion || !logonFormPage.SubmitSignIn.Displayed)
             {
                 Assert.Fail("The redirected logon is not loaded after signout expected time. Quit.");
             }
@@ -74,35 +63,31 @@ namespace Raymond.Costco.Web.AutoTest
         public void UserScenarios_AccountPage()
         {
             Header header = new Header(driver, wait);
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
-            {
-                Assert.Fail("The HomePage is not loaded during expected time. Quit.");
-            }
 
             Assert.AreEqual(@"Sign In / Register", header.LinkSignIn.Text);
 
             header.LinkSignIn.Click();
 
             LogonFormPage logonFormPage = new LogonFormPage(driver, wait);
-            logonFormPage.WaitAndVerifyLoadingCompletion(logonFormPage.SubmitSignIn);
             logonFormPage.SignIn("testhjy@test.com", "Biscuit-1");
 
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
+            if (!header.WaitPageAjaxLoadingCompletion)
             {
-                Assert.Fail("The redirected HomePage is not loaded after register during expected time. Quit.");
+                Assert.Fail("Redirect failed after register");
             }
 
             Assert.IsTrue(header.LinkMyAccount.Enabled);
+
             header.ShowUserMenu();
 
             var collection = header.UserPopMenuItems;
-            int count = collection.Count;
+            Assert.Greater(collection.Count, 0);
 
             collection[0].Click();
 
-            System.Threading.Thread.Sleep(2000);
+            AccountInformationViewPage accountInformationViewPage = new AccountInformationViewPage(driver, wait);
 
-            Assert.Greater(count, 0);
+            Assert.AreEqual("testhjy@test.com", accountInformationViewPage.LabelLogonEmail.Text);
         }
 
     }

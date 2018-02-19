@@ -15,7 +15,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("logonId"));
+                return wait.Until(d => d.FindElement(By.Id("logonId")));
             }
         }
 
@@ -23,7 +23,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.Id("logonPassword"));
+                return wait.Until(d => d.FindElement(By.Id("logonPassword")));
             }
         }
         
@@ -31,7 +31,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.XPath("//input[@type='submit' and @value='Sign In']"));
+                return wait.Until(d => d.FindElement(By.XPath("//input[@type='submit' and @value='Sign In']")));
             }
         }
 
@@ -39,22 +39,20 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return driver.FindElement(By.LinkText("Create Account"));
+                return wait.Until(d => d.FindElement(By.LinkText("Create Account")));
             }
         }
         protected IWebElement DivLogon
         {
             get
             {
-                return driver.FindElement(By.Id("logon"));
+                return wait.Until(d => d.FindElement(By.Id("logon")));
             }
         }
 
 
         public void SignIn(string email, string password)
         {
-            this.WaitAndVerifyLoadingCompletion(this.DivLogon);
-
             this.InputEmail.Click();
             this.InputEmail.SendKeys(email);
             this.InputPassword.Click();

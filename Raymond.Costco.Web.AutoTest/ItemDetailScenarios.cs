@@ -12,10 +12,19 @@ namespace Raymond.Costco.Web.AutoTest
         public void ItemDetailScenarios_Basic()
         {
             Header header = new Header(driver, wait);
-            if (!header.WaitAndVerifyLoadingCompletion(header.DivSearch))
-            {
-                Assert.Fail("The HomePage is not loaded during expected time. Quit.");
-            }
+
+            header.Search("sofa");
+
+            CatalogSearchPage catalogSearchPage = new CatalogSearchPage(driver, wait);
+            catalogSearchPage.Items[0].ImgProduct.Click();
+
+            ProductDetailPage productDetailPage = new ProductDetailPage(driver, wait);
+
+            Assert.IsTrue(productDetailPage.DivProductImage.Displayed);
+            Assert.IsTrue(productDetailPage.DivProductDetail.Displayed);
+            Assert.IsNotEmpty(productDetailPage.LabelPrice.Text);
+            Assert.IsNotEmpty(productDetailPage.LabelCrumbs.Text);
+
         }
 
     }
