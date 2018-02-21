@@ -46,7 +46,7 @@ namespace Raymond.Costco.Web.AutoTest.Library.Pages
         {
             get
             {
-                return wait.Until(d => d.FindElement(By.Id("error-container")));
+                return wait.Until(ExpectedConditions.ElementIsVisible(By.Id("error-container")));
             }
         }
         
